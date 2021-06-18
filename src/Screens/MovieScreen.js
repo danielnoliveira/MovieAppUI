@@ -1,7 +1,5 @@
 import React, {useRef, useEffect} from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
@@ -11,10 +9,10 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import HeaderShow from '../Components/HeaderShow';
 import Summary from '../Components/Summary';
 import CastCrew from '../Components/CastCrew';
+import MarkerContent from '../Components/MarkerContent';
 
 const width = Dimensions.get('window').width;
 
@@ -40,7 +38,7 @@ function MovieScreen({route, navigation}) {
   }, []);
 
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView style={styles.svMainContainer}>
       <ImageBackground
         source={data.background}
         imageStyle={styles.imgBG}
@@ -51,23 +49,8 @@ function MovieScreen({route, navigation}) {
           <Icon name="keyboard-arrow-left" size={48} color="black" />
         </TouchableOpacity>
         <Animated.View
-          style={[styles.tagShow, {left: newLeft, opacity: newOpacity}]}>
-          <View style={styles.ratingTotal}>
-            <IconFA name="star" color="#FCC419" size={32} />
-            <Text style={styles.ratingTotalText}>8.2/10</Text>
-            <Text style={styles.ratingTotalTextAll}>150.212</Text>
-          </View>
-          <TouchableOpacity style={styles.buttonRate}>
-            <IconFA name="star-o" color="black" size={32} />
-            <Text style={styles.buttonRateText}>Rate This</Text>
-          </TouchableOpacity>
-          <View style={styles.metascore}>
-            <View style={styles.metascoreBox}>
-              <Text style={styles.metascoreBoxText}>86</Text>
-            </View>
-            <Text style={styles.metascoreText}>Metascore</Text>
-            <Text style={styles.metascoreCritics}>62 critics reviews</Text>
-          </View>
+          style={[styles.marker, {left: newLeft, opacity: newOpacity}]}>
+          <MarkerContent />
         </Animated.View>
       </ImageBackground>
       <Animated.View
@@ -81,6 +64,9 @@ function MovieScreen({route, navigation}) {
 }
 
 const styles = StyleSheet.create({
+  svMainContainer: {
+    flex: 1,
+  },
   bgShow: {
     width: '100%',
     height: 352,
@@ -93,7 +79,7 @@ const styles = StyleSheet.create({
     top: 20,
     left: 16,
   },
-  tagShow: {
+  marker: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
@@ -116,73 +102,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 7,
-  },
-  ratingTotal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ratingTotalText: {
-    fontSize: 16,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    fontStyle: 'normal',
-    lineHeight: 19.49,
-    marginTop: 4,
-  },
-  ratingTotalTextAll: {
-    fontSize: 12,
-    fontFamily: 'Roboto',
-    fontWeight: '400',
-    fontStyle: 'normal',
-    lineHeight: 14.62,
-    color: '#9A9BB2',
-    marginTop: 2,
-  },
-  buttonRate: {
-    alignItems: 'center',
-  },
-  buttonRateText: {
-    fontSize: 16,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    fontStyle: 'normal',
-    lineHeight: 19.49,
-    marginTop: 4,
-  },
-  metascore: {
-    alignItems: 'center',
-  },
-  metascoreBox: {
-    width: 28,
-    height: 24,
-    backgroundColor: '#51CF66',
-    borderRadius: 2,
-    marginBottom: 12,
-  },
-  metascoreBoxText: {
-    marginHorizontal: 5.5,
-    marginVertical: 3.5,
-    fontSize: 14,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    fontStyle: 'normal',
-    lineHeight: 17.05,
-    color: 'white',
-  },
-  metascoreText: {
-    fontSize: 16,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    fontStyle: 'normal',
-    lineHeight: 19.49,
-  },
-  metascoreCritics: {
-    fontSize: 12,
-    fontFamily: 'Roboto',
-    fontWeight: '400',
-    fontStyle: 'normal',
-    lineHeight: 14.62,
-    color: '#9A9BB2',
   },
 });
 
